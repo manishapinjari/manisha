@@ -4,14 +4,14 @@ workflow "build_test_deploy" {
 }
 
 action "build_test" {
-  uses = "docker://circleci/python:2.7.15"
+  uses = "docker://circleci/python:3.13.0"
   runs = "./.github/build_test.sh"
 }
 
 
 action "deploy" {
-  uses = "docker://circleci/python:2.7.15"
+  uses = "docker://circleci/python:3.13.0"
   runs = "./.github/deploy.sh"
   needs = "build_test"
-  secrets = ["DOCKER_LOGIN", "DOCKER_PWD"]
+  secrets = ["DOCKERHUB_USERNAME", "DOCKER_HUB_TOKEN"]
 }
